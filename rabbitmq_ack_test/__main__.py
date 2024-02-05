@@ -68,8 +68,11 @@ async def message_handler(async_queue: asyncio.Queue):
             print("Task created")
         
         elif body == "cancel":
-            cancel_event.set()
-            print("Initiated task cancellation")
+            if work_in_progress is None:
+                print("No task ongoing, ignoring message")
+            else:
+                cancel_event.set()
+                print("Initiated task cancellation")
 
         async_queue.task_done()
 
