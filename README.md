@@ -29,8 +29,8 @@ I assume a RabbitMQ server runs on localhost (port=5672, user=rabbitmq, pass=rab
   * start   0
 * Publish a `start` message followed by a `cancel` one:
     ```
-    rabbitmq publish routing_key=start payload=start`
-    rabbitmq publish routing_key=cancel payload=cancel`
+    rabbitmq publish routing_key=start payload=start
+    rabbitmq publish exchange=cancel-exchange routing_key=cancel payload=cancel
     ```
 * The script shows it has taken into account both messages, the task that started has been cancelled and the message was acked.
 * Check the size of the `start` queue:
